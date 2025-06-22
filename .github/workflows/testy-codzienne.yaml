@@ -3,7 +3,7 @@ name: Testy automatyczne codziennie o 7 rano
 on:
   schedule:
     - cron: '0 7 * * *'  # codziennie o 7:00 UTC
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   testy:
@@ -42,5 +42,5 @@ jobs:
         password: ${{ secrets.SMTP_PASSWORD }}
         subject: "Błąd testów automatycznych"
         body: "Jeden lub więcej testów zakończył się błędem. Sprawdź wyniki na GitHub Actions."
-        to: piotrstaszak.jg@gmail.com
+        to: twoj.email@example.com
         from: github-actions@example.com
