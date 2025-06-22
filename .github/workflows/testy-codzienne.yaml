@@ -3,6 +3,7 @@ name: Testy automatyczne codziennie o 7 rano
 on:
   schedule:
     - cron: '0 7 * * *'  # codziennie o 7:00 UTC
+    workflow_dispatch:
 
 jobs:
   testy:
