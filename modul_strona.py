@@ -3,7 +3,7 @@ from playwright.async_api import TimeoutError
 async def odpalanie_strony(p):
     context = await p.chromium.launch_persistent_context(
         user_data_dir="/tmp/playwright",
-        headless=False,
+        headless=True,
         locale="pl-PL",
         permissions=["geolocation"],
         geolocation={"latitude": 51.107883, "longitude": 17.038538},
