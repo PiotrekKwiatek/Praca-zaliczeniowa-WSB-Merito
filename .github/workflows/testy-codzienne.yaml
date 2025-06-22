@@ -10,37 +10,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Ustaw Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.13'
+      - name: Ustaw Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
 
-    - name: Zainstaluj wymagane pakiety
-      run: |
-        python -m pip install --upgrade pip
-        pip install playwright
-        playwright install
+      - name: Zainstaluj wymagane pakiety
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright
+          playwright install
 
-    - name: Uruchom testy
-      run: |
-        python test_1_przelaczanie_widokow.py
-        python test_2_sprawdzenie_lokalizacji.py
-        python test_3_sprawdzenie_trasy.py
-        python test_4_sprawdzenie_pomiaru.py
-        python test_5_walidacja_uzupełniania.py
-        python test_6_przelaczanie_trybow_trasy.py
+      - name: Uruchom testy
+        run: |
+          python test_1_przelaczanie_widokow.py
+          python test_2_sprawdzenie_lokalizacji.py
+          python test_3_sprawdzenie_trasy.py
+          python test_4_sprawdzenie_pomiaru.py
+          python test_5_walidacja_uzupełniania.py
+          python test_6_przelaczanie_trybow_trasy.py
 
-    - name: Wyślij mail w razie błędu
-      if: failure()
-      uses: dawidd6/action-send-mail@v3
-      with:
-        server_address: smtp.twojadomena.pl
-        server_port: 587
-        username: ${{ secrets.SMTP_USERNAME }}
-        password: ${{ secrets.SMTP_PASSWORD }}
-        subject: "Błąd testów automatycznych"
-        body: "Jeden lub więcej testów zakończył się błędem. Sprawdź wyniki na GitHub Actions."
-        to: twoj.email@example.com
-        from: github-actions@example.com
+      - name: Wyślij mail w razie błędu
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.twojadomena.pl
+          server_port: 587
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "Błąd testów automatycznych"
+          body: "Jeden lub więcej testów zakończył się błędem. Sprawdź wyniki na GitHub Actions."
+          to: piotrstaszak.jg@gmail.com
+          from: github-actions@example.com
