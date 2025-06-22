@@ -3,7 +3,7 @@ name: Testy automatyczne codziennie o 7 rano
 on:
   schedule:
     - cron: '0 7 * * *'  # codziennie o 7:00 UTC
-  workflow_dispatch:
+  workflow_dispatch:      # umożliwia ręczne uruchomienie
 
 jobs:
   testy:
@@ -25,12 +25,29 @@ jobs:
 
       - name: Uruchom testy
         run: |
+          echo "::group::TEST 1: Przełączanie widoków"
           python test_1_przelaczanie_widokow.py
+          echo "::endgroup::"
+
+          echo "::group::TEST 2: Sprawdzenie lokalizacji"
           python test_2_sprawdzenie_lokalizacji.py
+          echo "::endgroup::"
+
+          echo "::group::TEST 3: Sprawdzenie trasy"
           python test_3_sprawdzenie_trasy.py
+          echo "::endgroup::"
+
+          echo "::group::TEST 4: Sprawdzenie pomiaru"
           python test_4_sprawdzenie_pomiaru.py
+          echo "::endgroup::"
+
+          echo "::group::TEST 5: Walidacja uzupełniania"
           python test_5_walidacja_uzupełniania.py
+          echo "::endgroup::"
+
+          echo "::group::TEST 6: Przełączanie trybów trasy"
           python test_6_przelaczanie_trybow_trasy.py
+          echo "::endgroup::"
 
       - name: Wyślij mail w razie błędu
         if: failure()
@@ -40,7 +57,7 @@ jobs:
           server_port: 587
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
-          subject: "Błąd testów automatycznych"
-          body: "Jeden lub więcej testów zakończył się błędem. Sprawdź wyniki na GitHub Actions."
+          subject: "❌ Błąd testów automatycznych"
+          body: "Jeden lub więcej testów zakończył się błędem. Sprawdź wyniki w zakładce Actions na GitHubie."
           to: piotrstaszak.jg@gmail.com
           from: github-actions@example.com
