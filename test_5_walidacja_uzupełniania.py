@@ -5,7 +5,6 @@ from modul_strona import odpalanie_strony  # Twój moduł z funkcją odpalanie_s
 async def wpisz_i_pobierz_wyniki(page, zapytanie: str):
     await page.fill('#search > form > input[type="text"]', '')
 
-    # Zapamiętaj tekst pierwszego wyniku przed zmianą
     poprzedni_tekst = ''
     pierwszy_wynik = await page.query_selector('li.item span.text > strong')
     if pierwszy_wynik:
@@ -14,7 +13,6 @@ async def wpisz_i_pobierz_wyniki(page, zapytanie: str):
     await page.type('#search > form > input[type="text"]', zapytanie, delay=100)
 
     try:
-        # Czekaj, aż pierwszy wynik się zmieni (tekst będzie inny niż poprzednio)
         await page.wait_for_function(
             f'document.querySelector("li.item span.text > strong") && ' +
             f'document.querySelector("li.item span.text > strong").innerText.trim() != "{poprzedni_tekst}"',
@@ -24,7 +22,6 @@ async def wpisz_i_pobierz_wyniki(page, zapytanie: str):
         print(f"Lista wyników dla '{zapytanie}' nie zmieniła się w czasie 10 sekund.")
         return []
 
-    # Pobierz wszystkie wyniki
     elementy = await page.query_selector_all('li.item')
     wyniki = []
     for el in elementy:
