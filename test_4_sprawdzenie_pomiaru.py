@@ -41,7 +41,7 @@ async def test_mierzenie_odleglosci(page):
     await page.wait_for_selector('#distance-meter > div > div.scroll-section > ul > li.distance > strong', timeout=7000)
     dystans = await page.inner_text('#distance-meter > div > div.scroll-section > ul > li.distance > strong')
     jednostka = await page.inner_text('#distance-meter > div > div.scroll-section > ul > li.distance > small.unit')
-    print(f"Zmierzoną odległość to: {dystans} {jednostka}")
+    print(f"Zmierzona odległość to: {dystans} {jednostka}")
     await pause(2000)
 
 async def main():
