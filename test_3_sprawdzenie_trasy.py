@@ -10,7 +10,6 @@ async def test_wyszukiwanie_trasy(page):
     await page.click('#search > form > button.submit.notranslate')
     print("Kliknięto ikonę lupy")
 
-    # zamiast czekać na 'a.li-inner', klikamy link z tekstem 'Trasa'
     await page.wait_for_selector('a:has-text("Trasa")', timeout=10000)
     await page.click('a:has-text("Trasa")')
     print("Kliknięto przycisk 'Trasa'")
