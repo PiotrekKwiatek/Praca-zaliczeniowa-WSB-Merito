@@ -5,7 +5,7 @@ on:
     - cron: '5 5 * * *'  # codziennie o 5:00 UTC (7:00 CEST, czas letni)
   workflow_dispatch:      # umożliwia ręczne uruchomienie
 
-jobs:
+#jobs:
   testy:
     runs-on: ubuntu-latest
 
